@@ -8,9 +8,9 @@ import (
 	"runtime"
 )
 
-// Demo demonstraes implementation of an exported function in
-// root package. It also emits the Go version used for the build
-// along with the target OS and architecture to stdout.
+// Demo demonstrates an implementation of an exported function in
+// the root package. It also emits the Go version used for the build
+// along with the target OS and architecture to stdout for fun..
 func Demo() {
 	fmt.Println("gcpprojectlayout.Demo() in the root package")
 	fmt.Printf("Compiled with %s for %s/%s\n", runtime.Version(),

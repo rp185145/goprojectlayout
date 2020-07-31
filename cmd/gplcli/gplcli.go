@@ -72,6 +72,12 @@ var uuidCmd = &cobra.Command{
 }
 
 func init() {
+	// This code could be added to main() before the
+	// call to rootCmd.Execute() but code that implements
+	// Cobra will generally contain a source file for each
+	// command and an init() function to initialize the
+	// command tree and flags. An init() function is used
+	// hint at how this is usually done.
 	rootCmd.AddCommand(demoCmd)
 	rootCmd.AddCommand(helloCmd)
 	rootCmd.AddCommand(howdyCmd)
