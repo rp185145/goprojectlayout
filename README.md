@@ -8,6 +8,10 @@ Many of the ideas in this repository were coded live during a demo call demonstr
 
 Go through this README and the code to see how I work. If you know some better organization techniques and would like to share them, let me know with a message or even a pull request.
 
+## Building
+
+See the [Building and Testing](BUILDING.md) document.
+
 ## Packages
 
 This project implements 3 packages usable as APIs:
@@ -33,60 +37,6 @@ Demonstrates a separate application calling an exported function in the root (`g
 ### gplcli
 
 A simple implementation using Cobra to handle the command-line interface processing. This executable contains several subcommands corresponding to the above applications, meaning it contains all the above functionality in a single executable. Execute `gplcli` to see the available subcommands. From there, the `--help` option can be used to determine the options for the subcommands. Only `gplcli custom` contains a command-line option. It can be discovered with `gplcli custom --help`. It is the subcommands, help, and option processing that are handled by Cobra.
-
-## Building
-
-The source for the individual executables is found in the `cmd/` subdirectory, which in turn contains a subdirectory for each executable.
-
-### `hello`
-
-```
-go build -o bin/hello ./cmd/hello/...
-```
-
-### `howdy`
-
-```
-go build -o bin/howdy ./cmd/howdy/...
-```
-
-### `uuid`
-
-```
-go build -o bin/uuid ./cmd/uuid/...
-```
-
-### `demo`
-
-```
-go build -o bin/demo ./cmd/demo/...
-```
-
-### `gplcli`
-
-This application implements a simple user interface using Cobra. Because the packages are written in an API style, they can be combined, mixed, and re-used. This application contains the subcommand `hello`, `howdy`, `uuid`, and `demo` to match the functionality of the above applications. A `custom` subcommand was added to demonstrate how to use a command-line option.
-
-The source file layout for this isn't ideal. Normally each subcommand should probably be in its own source file. This code is mainly to show how to use Cobra to frame out a command-line application. Depending on feedback, I may restructure this in the future if any users find that useful.
-
-```
-go build -o bin/gplcli ./cmd/gplcli/...
-```
-
-## Testing
-
-Test functions and modules were created using the VSCode Go extension. Use "Ctrl-Shift-P -> Go: Generate unit tests for function".
-
-To test everything and generate coverage output. Coverage output goes to `coverage.txt`.
-
-```
-go test -coverprofile=coverage.txt ./...
-```
-
-To process coverage output to HTML. HTML output goes to `coverage.html`.
-
-```
-go tool cover -html=coverage.txt -o coverage.html
-```
 
 ## API Code
 
@@ -123,6 +73,8 @@ Because I've given this project a permissive license, `pkg.go.dev` also consumes
 ## Useful Information and Packages
 
 ### Go Modules
+
+The use of Go Modules for dependency management was introduced in Go 1.11 (August 2018) and became the default in 1.13 (September 2019). Keep this in mind when referencing older documentation.
 
 https://blog.golang.org/using-go-modules
 

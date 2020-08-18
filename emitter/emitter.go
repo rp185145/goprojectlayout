@@ -6,6 +6,14 @@ import (
 	"io"
 	"os"
 
+	// Because the Go tools use the root go.mod file
+	// to help determine its actions, it will check
+	// the go.mod file in this project, determine the
+	// local filesystem contains the files needed
+	// for github.com/rp185145/goprojectlayout,
+	// including idutils/, then use the local copy to
+	// resolve the package rather than using the
+	// network location.
 	"github.com/rp185145/goprojectlayout/idutils"
 )
 
