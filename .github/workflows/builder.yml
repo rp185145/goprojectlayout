@@ -1,0 +1,31 @@
+on: [push, pull_request]
+name: Builder
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: [1.15.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Code format
+        run: diff -u <(echo -n) <(gofmt -d -s .)
+      - name: Vet
+        run: go vet ./...
+      - name: Unit tests
+        run: go test -race . ./emitter/... ./idutils/...
+      - name: Build and Execute
+        run: |
+          for cmd in hello howdy uuid demo gplcli
+          do
+            GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o "bin/$cmd" "./cmd/$cmd/..."
+            GOOS=windows GOARCH=amd64 go build -o "bin/$cmd.exe" "./cmd/$cmd/..."
+            echo Executing "bin/$cmd"
+            "bin/$cmd"
+          done
